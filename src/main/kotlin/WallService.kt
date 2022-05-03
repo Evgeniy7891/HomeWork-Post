@@ -1,11 +1,12 @@
-import kotlin.random.Random
 
 object WallService {
     var posts = emptyArray<Post>()
+    var generateId = 1
 
     fun add(post: Post): Post {
-        val postNew = post.copy(id = Random.nextInt(1, 10))
+        val postNew = post.copy(id = generateId)
         posts += postNew
+        generateId += 1
         return posts.last()
     }
 
@@ -18,11 +19,10 @@ object WallService {
     fun update(post: Post): Boolean {
         for ((index, updatePost) in posts.withIndex()) {
             if (post.id == updatePost.id) {
-                posts[index] = updatePost.copy(id = post.id, date = post.id)
+                posts[index] = updatePost.copy(ownerId = post.ownerId, date = post.date)
                 return true
             }
         }
         return false
     }
 }
-

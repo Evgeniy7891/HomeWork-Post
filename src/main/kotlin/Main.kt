@@ -29,6 +29,7 @@ fun main() {
     WallService.add(post1)
     WallService.add(post2)
     WallService.print()
+    val a = post1.copy(id = 2)
     // работа функции update
-    if (WallService.update(post2))WallService.print()
+    if (WallService.update(a))WallService.print()
     }

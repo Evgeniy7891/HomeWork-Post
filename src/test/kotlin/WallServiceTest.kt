@@ -1,5 +1,7 @@
 import org.jetbrains.annotations.NotNull
 import org.junit.Test
+import org.junit.Assert.*
+
 
 import org.junit.Assert.*
 
@@ -38,7 +40,7 @@ class WallServiceTest {
 
     // тест что возращается true
     @Test
-    fun update_True_Test() {
+    fun updateTrueTest() {
         val service = WallService
         val test1 = Post(0, 1, 2, 3, 4, "5", 6, 7, 8, "9", "10", 11, "12", 13, "14", 15, true, false, true, 16, true)
         val test2 =
@@ -112,26 +114,48 @@ class WallServiceTest {
             161616,
             true
         )
-        val newTest1 = test1.copy(id = 1)
-        val newTest2 = test2.copy(id = 0)
-        val newTest3 = test3.copy(id = 3)
+        service.add(test1)
+        service.add(test2)
+        service.add(test3)
         val result = service.update(update)
-        assertTrue(true)
+        assertTrue(result)
     }
 
     // тест что возращается false
     @Test
-    fun update_False_Test() {
+    fun updateFalseTest() {
         val service = WallService
-        service.add(Post(0, 1, 2, 3, 4, "5", 6, 7, 8, "9", "10", 11, "12", 13, "14", 15, true, false, true, 16, true))
-        service.add(
+        val test1 = Post(
+            1,
+            12345689,
+            12345689,
+            111111,
+            1460041200,
+            "Текст поста",
+            6,
+            7,
+            8,
+            "9",
+            "10",
+            11,
+            "12",
+            13,
+            "14",
+            15,
+            true,
+            false,
+            true,
+            16,
+            true
+        )
+        val test2 =
             Post(
-                1,
-                1,
                 2,
-                33,
-                4,
-                "55",
+                12345665,
+                12345665,
+                111111,
+                1460041200,
+                "Текст поста",
                 6,
                 7,
                 8,
@@ -148,15 +172,14 @@ class WallServiceTest {
                 16,
                 true
             )
-        )
-        service.add(
+        val test3 =
             Post(
-                2,
-                1,
-                2,
-                3,
-                444,
-                "555",
+                789,
+                12345670,
+                12345555,
+                111111,
+                1460041200,
+                "Текст поста",
                 6,
                 7,
                 8,
@@ -173,13 +196,12 @@ class WallServiceTest {
                 161616,
                 true
             )
-        )
         val update = Post(
-            3,
-            4,
-            2,
-            3,
-            4444,
+            256,
+            99999999,
+            99999999,
+            99999999,
+            1460041200,
             "Update",
             6,
             7777,
@@ -197,7 +219,10 @@ class WallServiceTest {
             161616,
             true
         )
+        service.add(test1)
+        service.add(test2)
+        service.add(test3)
         val result = service.update(update)
-        assertFalse(false)
+        assertFalse(result)
     }
 }
