@@ -24,12 +24,16 @@ fun main() {
     )
     val (_, _, _, _, date, text) = post1  // эксперемнтировал с деструктиризацией
     println("$date, $text")
-    val post2 = Post()
-    // работа функции add
+    val post2 = Post ()// работа функции add
     WallService.add(post1)
     WallService.add(post2)
     WallService.print()
     val a = post1.copy(id = 2)
     // работа функции update
     if (WallService.update(a))WallService.print()
+    val nulll : String? = post1.comments // nullable
+    val nulll2 = post1.comments?.length  // saf call
+    val nulll3 = post1.comments ?: "Elvis" // elvis operator
+
     }
+
