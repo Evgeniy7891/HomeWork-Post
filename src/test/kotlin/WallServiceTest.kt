@@ -225,4 +225,52 @@ class WallServiceTest {
         val result = service.update(update)
         assertFalse(result)
     }
+
+    @Test(expected = PostNotFoundException::class)
+    fun createCommentThrowException() {
+        val postTest = Post(1, 1, 1, 1, 1, "!", 1, 1, 1, "1", "1", 1, "1", 1, "1", 1, true, true, false, 1, false)
+        val testComment = Comment(33, 33, 33, "Not")
+        WallService.add(postTest)
+        WallService.createComment(testComment)
+    }
+
+    @Test
+    fun createCommentTest() {
+        val postTest = Post(1, 1, 1, 1, 1, "!", 1, 1, 1, "1", "1", 1, "1", 1, "1", 1, true, true, false, 1, false)
+        val testComment = Comment(1, 1, 1, "Yes")
+        WallService.add(postTest)
+        val result = WallService.createComment(testComment)
+        assertTrue(result)
+    }
+
+    @Test(expected = ErrorCommentException::class)
+    fun createComplaintReasonTest() {
+        val postTest = Post(1, 1, 1, 1, 1, "!", 1, 1, 1, "1", "1", 1, "1", 1, "1", 1, true, true, false, 1, false)
+        val testComment = Comment(1, 1, 1, "Yes")
+        WallService.add(postTest)
+        WallService.createComment(testComment)
+        val complaintTest = ComplaintComment(1, 2, 9)
+        WallService.createComplaint(complaintTest)
+    }
+
+    @Test(expected = ErrorCommentException::class)
+    fun createComplaintCommentTest() {
+        val postTest = Post(1, 1, 1, 1, 1, "!", 1, 1, 1, "1", "1", 1, "1", 1, "1", 1, true, true, false, 1, false)
+        val testComment = Comment(1, 1, 1, "Yes")
+        WallService.add(postTest)
+        WallService.createComment(testComment)
+        val complaintTest = ComplaintComment(66, 2, 5)
+        WallService.createComplaint(complaintTest)
+    }
+
+    @Test
+    fun createComplaintTest() {
+        val postTest = Post(1, 1, 1, 1, 1, "!", 1, 1, 1, "1", "1", 1, "1", 1, "1", 1, true, true, false, 1, false)
+        val testComment = Comment(1, 1, 1, "Yes")
+        WallService.add(postTest)
+        WallService.createComment(testComment)
+        val complaintTest = ComplaintComment(1, 2, 5)
+        val result = WallService.createComplaint(complaintTest)
+        assertEquals("Жалоба по причине - Оскорбление", result)
+    }
 }
